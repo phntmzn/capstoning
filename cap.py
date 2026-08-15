@@ -198,5 +198,16 @@ for i, insn in enumerate(md.disasm(code, text_addr)):
 
     if i + 1 >= MAX_INSTRUCTIONS:
         break
-    
+
+for i, insn in enumerate(md.disasm(code, text_addr)):
+    if insn.mnemonic in ("pacibsp", "paciasp"):
+        print()
+        print(f"--- probable function @ 0x{insn.address:x} ---")
+
+    print(
+        f"0x{insn.address:016x}: "
+        f"{insn.mnemonic:<10} "
+        f"{insn.op_str}"
+    )
+
 print("ARM64 Mach-O slice loaded successfully")
